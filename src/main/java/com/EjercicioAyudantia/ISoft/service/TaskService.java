@@ -21,4 +21,14 @@ public class TaskService {
     public List<Task> getAll() {
         return tasks;
     }
+
+    public Task complete(Long id) {
+    return tasks.stream()
+            .filter(t -> t.getId().equals(id))
+            .findFirst()
+            .map(t -> {
+                t.setCompletada(true);
+                return t;
+            }).orElse(null);
+}
 }

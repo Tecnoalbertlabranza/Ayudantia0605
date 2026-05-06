@@ -21,4 +21,10 @@ public class TaskController {
         Task createdTask = taskService.save(task);
         return new ResponseEntity<>(createdTask, HttpStatus.CREATED);
     }
+
+    @PatchMapping("/{id}/complete")
+public ResponseEntity<Task> completeTask(@PathVariable Long id) {
+    Task task = taskService.complete(id);
+    return task != null ? ResponseEntity.ok(task) : ResponseEntity.notFound().build();
+}
 }
