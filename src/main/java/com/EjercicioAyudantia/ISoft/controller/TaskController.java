@@ -30,7 +30,7 @@ public class TaskController {
         return new ResponseEntity<>(createdTask, HttpStatus.CREATED);
     }
 
-@GetMapping
+    @GetMapping
     public ResponseEntity<List<Task>> getTasks(
             @RequestParam(required = false) String prioridad,
             @RequestParam(required = false) String titulo,
@@ -41,4 +41,9 @@ public class TaskController {
         return new ResponseEntity<>(filteredTasks, HttpStatus.OK);
     }
 
+    @PatchMapping("/{id}/complete")
+    public ResponseEntity<Task> completeTask(@PathVariable Long id) {
+        Task task = taskService.complete(id);
+        return task != null ? ResponseEntity.ok(task) : ResponseEntity.notFound().build();
+    }
 }
