@@ -10,4 +10,5 @@ public class ISoftApplication {
 		SpringApplication.run(ISoftApplication.class, args);
 	}
 
+
 }

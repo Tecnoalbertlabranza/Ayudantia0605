@@ -23,11 +23,11 @@ public class TaskService {
     
     public List<Task> findByFilters(String prioridad, String titulo, String fechaLimite) {
         return tasks.stream()
-            // Filtra por prioridad exacta si el parámetro existe
+        
             .filter(t -> prioridad == null || t.getPrioridad().equalsIgnoreCase(prioridad))
-            // Filtra si el título contiene la cadena (case insensitive)
+
             .filter(t -> titulo == null || t.getTitulo().toLowerCase().contains(titulo.toLowerCase()))
-            // Filtra por fecha límite exacta
+
             .filter(t -> fechaLimite == null || t.getFechaLimite().equals(fechaLimite))
             .collect(Collectors.toList());
     }
