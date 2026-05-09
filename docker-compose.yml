@@ -1,0 +1,43 @@
+# 1. Versión de la especificación de Docker Compose
+# Actualmente se puede omitir o usar '3.8', que es la más estable.
+version: '3.8'
+
+# 2. Definición de servicios (Contenedores que componen tu aplicación)
+services:
+
+  # Nombre del servicio (puedes elegir el que quieras)
+  app-todo:
+    
+    # Indica dónde está el Dockerfile para construir la imagen.
+    # El "." significa que el Dockerfile está en la misma carpeta que este archivo.
+    build: .
+    
+    # Nombre que tendrá la imagen una vez construida localmente.
+    image: proyectito-isoft-image
+    
+    # Nombre del contenedor cuando esté en ejecución.
+    container_name: todo-container-isoft
+    
+    # Mapeo de puertos: "PUERTO_PC:PUERTO_CONTENEDOR"
+    # Esto crea el "puente" para acceder desde localhost:8080.
+    ports:
+      - "8080:8080"
+    
+    # Variables de entorno para configurar Spring Boot sin cambiar el código.
+    # Útil para cambiar perfiles o configuraciones de base de datos en el futuro.
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SERVER_PORT=8080
+    
+    # Política de reinicio: Reinicia el contenedor automáticamente si falla.
+    restart: always
+
+# 3. Definición de redes (opcional en proyectos simples)
+# Docker Compose crea una red interna por defecto para que los servicios se vean entre sí.
+networks:
+  default:
+    name: red-ayudantia-isoft
+
+    # Comando de ejecucion para cualquier docker compose 
+    #docker-compose up --build 
+    # Este comando se ejecuta en la consola 
